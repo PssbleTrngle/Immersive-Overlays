@@ -50,6 +50,8 @@
   "config.immersiveoverlays.compass_direction_text_colour": "Direction Color",
   "config.immersiveoverlays.compass_text_colour": "Text Color",
   "config.immersiveoverlays.compass_x_colour": "X Color",
+  "config.immersiveoverlays.compass_lodestone_colour": "Lodestone Color",
+  "config.immersiveoverlays.compass_recovery_colour": "Recovery Color",
   "config.immersiveoverlays.compass_x_items": "Items that show X coordinates",
   "config.immersiveoverlays.compass_x_blocks": "Blocks that show X coordinates",
   "config.immersiveoverlays.compass_y_colour": "Y Color",

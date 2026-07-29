@@ -343,6 +343,7 @@ publishMods {
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
+        embeds("mru")
         optional("cloth-config")
     }
 
@@ -357,6 +358,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         client = true
         server = false
+        embeds("mru")
     }
 }
 

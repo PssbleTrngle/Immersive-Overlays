@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Style;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.*;
 
@@ -21,6 +22,7 @@ public class CompassOverlay {
     public static boolean showY = false;
     public static boolean showZ = false;
     public static GlobalPos anchor;
+    public static CompassOverlayStyle style = CompassOverlayStyle.COMPASS;
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
@@ -155,16 +157,49 @@ public class CompassOverlay {
 
 	private static Component xText(String x, Style textStyle) {
         var xLiteral = Component.literal(x).withStyle(textStyle);
-		return Component.translatable("gui.immersiveoverlays.coordinates.x", xLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour));
+		return Component.translatable("gui.immersiveoverlays.coordinates.x", xLiteral).withStyle(Style.EMPTY.withColor(style.x()));
 	}
 
     private static Component yText(String y, Style textStyle) {
         var yLiteral = Component.literal(y).withStyle(textStyle);
-        return Component.translatable("gui.immersiveoverlays.coordinates.y", yLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour));
+        return Component.translatable("gui.immersiveoverlays.coordinates.y", yLiteral).withStyle(Style.EMPTY.withColor(style.y()));
     }
 
     private static Component zText(String z, Style textStyle) {
         var zLiteral = Component.literal(z).withStyle(textStyle);
-        return Component.translatable("gui.immersiveoverlays.coordinates.z", zLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour));
+        return Component.translatable("gui.immersiveoverlays.coordinates.z", zLiteral).withStyle(Style.EMPTY.withColor(style.z()));
     }
+
+    public enum CompassOverlayStyle {
+        COMPASS(()-> ModConfig.get().compass_x_colour, ()->ModConfig.get().compass_y_colour, ()->ModConfig.get().compass_z_colour),
+        LODESTONE(()-> ModConfig.get().compass_lodestone_colour),
+        RECOVERY(()->ModConfig.get().compass_recovery_colour),
+        ;
+
+        private final Supplier<Integer> x;
+        private final Supplier<Integer> y;
+        private final Supplier<Integer> z;
+
+        CompassOverlayStyle(Supplier<Integer> x, Supplier<Integer> y, Supplier<Integer> z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        CompassOverlayStyle(Supplier<Integer> all) {
+            this(all, all, all);
+        }
+
+		public Integer x() {
+			return x.get();
+		}
+
+        public Integer y() {
+            return y.get();
+        }
+
+        public Integer z() {
+            return z.get();
+        }
+	}
 }

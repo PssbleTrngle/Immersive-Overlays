@@ -381,6 +381,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api")
         optional("cloth-config")
+        embeds("mru")
     }
 
     curseforge {
@@ -389,6 +390,7 @@ publishMods {
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api")
+        embeds("mru")
         client = true
         server = false
     }

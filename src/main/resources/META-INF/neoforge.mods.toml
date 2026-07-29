@@ -30,5 +30,12 @@ versionRange = "[${minecraft}]"
 ordering = "NONE"
 side = "CLIENT"
 
+[[dependencies.immersiveoverlays]]
+modId = "mru"
+type = "required"
+versionRange = "[1.0.30, )"
+ordering = "NONE"
+side = "CLIENT"
+
 [[mixins]]
 config = "immersiveoverlays.mixins.json"

@@ -27,7 +27,8 @@
   "icon": "icon.png",
   "environment": "client",
   "mixins": [
-    "immersiveoverlays.mixins.json"],
+    "immersiveoverlays.mixins.json"
+  ],
   "entrypoints": {
     "client": [
       "cc.cassian.immersiveoverlays.fabric.ImmersiveOverlaysFabricClient"
@@ -39,7 +40,8 @@
   "depends": {
     "fabricloader": ">=0.15.7",
     "minecraft": "${minecraft}",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "mru": ">=1.0.30"
   },
   "recommends": {
     "cloth-config": "*",

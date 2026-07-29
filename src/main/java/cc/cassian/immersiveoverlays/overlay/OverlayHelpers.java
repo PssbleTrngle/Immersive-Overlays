@@ -28,9 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class OverlayHelpers {
     public static boolean showWaila = false;
@@ -220,8 +218,11 @@ public class OverlayHelpers {
         SpeedOverlay.showSpeed = b;
         WindOverlay.showWind = b;
         showWaila = b;
-        CompassOverlay.anchor = b ? CompassOverlay.anchor : null;
-    }
+		if (!b) {
+            CompassOverlay.style = CompassOverlay.CompassOverlayStyle.COMPASS;
+            CompassOverlay.anchor = null;
+        }
+	}
 
 
     public static boolean isContainer(ItemStack stack) {
@@ -318,6 +319,7 @@ public class OverlayHelpers {
             return;
         *///?}
         CompassOverlay.anchor = anchor;
+        CompassOverlay.style = CompassOverlay.CompassOverlayStyle.LODESTONE;
     }
 
     private static void readRecoveryCompassAnchor(ItemStack stack) {
@@ -327,5 +329,6 @@ public class OverlayHelpers {
         Optional<GlobalPos> anchor = player.getLastDeathLocation();
         if (anchor.isEmpty() || player.level().dimension() != anchor.get().dimension()) return;
         CompassOverlay.anchor = anchor.get();
+        CompassOverlay.style = CompassOverlay.CompassOverlayStyle.RECOVERY;
     }
 }

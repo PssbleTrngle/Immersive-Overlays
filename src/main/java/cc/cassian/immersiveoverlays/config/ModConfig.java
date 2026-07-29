@@ -160,8 +160,10 @@ public class ModConfig {
     public List<String> wind_items = List.of("breezy:gust_gauge");
     public List<String> wind_blocks = List.of();
     public boolean compat_dead_reckoning = true;
+    public int compass_lodestone_colour = -1500560;
+    public int compass_recovery_colour = -7405585;
 
-    public static void load() {
+	public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;

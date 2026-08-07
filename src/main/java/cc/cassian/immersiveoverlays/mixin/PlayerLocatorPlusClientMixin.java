@@ -22,7 +22,10 @@ import java.util.UUID;
 public class PlayerLocatorPlusClientMixin {
     //? if fabric {
     @Inject(method = "isBarVisible", at = @At(value = "HEAD"), cancellable = true)
-    private void hideHud(Minecraft client, CallbackInfoReturnable<Boolean> cir) {
+    private void hideHud(
+            //? if <1.21
+            //Minecraft client,
+            CallbackInfoReturnable<Boolean> cir) {
 		if (ModConfig.get().compat_playerlocatorplus && !CompassOverlay.showX) {
             cir.setReturnValue(false);
         }

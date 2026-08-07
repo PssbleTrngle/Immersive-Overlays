@@ -10,9 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 //? neoforge {
 /*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 *///?} else forge {
-/*import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+/*import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 *///?}
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,7 +50,7 @@ public class ModClient {
             //? neoforge
             //RegisterGuiLayersEvent event
             //? forge
-            //CustomizeGuiOverlayEvent.DebugText event
+            //RenderGuiOverlayEvent event
     ) {
         //? fabric
         Object event = null;

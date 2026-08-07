@@ -6,12 +6,11 @@ import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.*;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -34,8 +33,11 @@ public class ImmersiveOverlaysForgeClient {
         ModLists.loadLists();
     }
 
-    public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
-        ModClient.registerOverlays(event);
+
+    public static void renderGameOverlayEvent(RenderGuiOverlayEvent.Post event) {
+        if (event.getOverlay().id().toString().equals("minecraft:hotbar")) {
+            ModClient.registerOverlays(event);
+        }
     }
 
     public static void registerKeybinds(RegisterKeyMappingsEvent event){

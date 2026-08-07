@@ -7,17 +7,18 @@ import net.minecraft.resources.ResourceLocation;
 //? neoforge {
 /*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
  *///?} else forge {
-/*import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+/*import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import org.jetbrains.annotations.UnknownNullability;
 *///?}
 
 
 public class Platform {
 
 	public static void registerOverlay(ResourceLocation id, Overlay overlay
-	                                   //? neoforge
-	                                   //,RegisterGuiLayersEvent event
-	                                   //? forge
-		   //, CustomizeGuiOverlayEvent.DebugText event
+									   //? neoforge
+									   //,RegisterGuiLayersEvent event
+									   //? forge
+		   //, RenderGuiOverlayEvent event
 									   //? fabric
 									   ,Object event
 			) {

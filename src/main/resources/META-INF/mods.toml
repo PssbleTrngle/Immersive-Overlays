@@ -33,6 +33,6 @@ side = "CLIENT"
 [[dependencies.immersiveoverlays]]
 modId = "mru"
 mandatory = true
-versionRange = "[1.0.30)"
+versionRange = "[1.0.30, )"
 ordering = "NONE"
 side = "CLIENT"

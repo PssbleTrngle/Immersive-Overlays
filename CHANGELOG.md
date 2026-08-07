@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.3]
+
+### Added
+- Support for Trinkets on 26.2 and Ohmega.
+- Lodestone and Recovery Compasses now change the X/Y/Z colour when they are overriding the compass overlay.
+
+### Changed
+- Mod compatibility code has been moved into a dedicated library, MRU, to allow code re-use between Immersive Overlays and Immersive Minimaps.
+
 ## [1.7.2]
 
 ### Added

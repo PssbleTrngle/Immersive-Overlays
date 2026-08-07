@@ -22,13 +22,8 @@ public class BiomeOverlay {
     public static ResourceLocation UNDEFINED = ModClient.locate("textures/immersiveoverlays/undefined.png");
 
 
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
-    //? if >1.21 {
-        , net.minecraft.client.DeltaTracker deltaTracker
-    //?} else {
-        /*, float deltaTracker
-    *///?}
-    ) {
+    //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
         if (!showBiome || !ModConfig.get().biome_enable)
             return;
         if (ModConfig.get().biome_reduced_info) {
@@ -117,12 +112,8 @@ public class BiomeOverlay {
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
-        return biome.unwrapKey().orElse(Biomes.THE_VOID)
-        //? if >1.21.10 {
-        /*.identifier();
-        *///?} else {
-        .location();
-        //?}
+        //~ if >1.21.10 'location'-> 'identifier'
+        return biome.unwrapKey().orElse(Biomes.THE_VOID).location();
     }
 
     public static String formatBiome(ResourceLocation biome) {

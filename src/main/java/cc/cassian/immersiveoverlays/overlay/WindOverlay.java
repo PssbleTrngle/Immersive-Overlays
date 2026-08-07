@@ -16,13 +16,9 @@ public class WindOverlay {
     public static boolean showWind = false;
 
 
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
-            //? if >1.21 {
-            , net.minecraft.client.DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
-    ) {
+
+    //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
         if (!showWind || !ModConfig.get().wind_enable)
             return;
         var mc = Minecraft.getInstance();

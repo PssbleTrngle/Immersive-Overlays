@@ -24,13 +24,9 @@ public class CompassOverlay {
     public static GlobalPos anchor;
     public static CompassOverlayStyle style = CompassOverlayStyle.COMPASS;
 
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
-            //? if >1.21 {
-            , net.minecraft.client.DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
-    ) {
+
+    //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
         boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info && ModConfig.get().biome_icons;
         if (!showX && !showY && !showZ)
             return;

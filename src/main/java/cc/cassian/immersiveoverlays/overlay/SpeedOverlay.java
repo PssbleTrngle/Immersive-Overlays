@@ -18,13 +18,9 @@ public class SpeedOverlay {
     public static boolean showSpeed = false;
 
 
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
-            //? if >1.21 {
-            , DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
-    ) {
+
+    //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
         if (!showSpeed || !ModConfig.get().speed_enable)
             return;
         var mc = Minecraft.getInstance();

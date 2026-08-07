@@ -29,13 +29,9 @@ public class ClockOverlay {
     public static boolean showDayCount = false;
 
 
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
-            //? if >1.21 {
-            , net.minecraft.client.DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
-    ) {
+
+    //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
         if (!isVisible() || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();

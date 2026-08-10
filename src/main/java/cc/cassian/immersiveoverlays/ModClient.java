@@ -28,6 +28,7 @@ public class ModClient {
     public static final String CATEGORY = "key.category.immersiveoverlays.keybinds";
      //?}
 
+    //~ if >26.2 'KEYSYM'->'KEYBOARD' {
     // A key mapping with keyboard as the default
     public static final KeyMapping overlayToggle = new KeyMapping(
             "key.immersiveoverlays.toggle", // The translation key of the name shown in the Controls screen
@@ -41,6 +42,7 @@ public class ModClient {
             InputConstants.UNKNOWN.getValue(), // The default keycode
             CATEGORY
     );
+    //~}
 
     public static void init() {
         ModConfig.load();

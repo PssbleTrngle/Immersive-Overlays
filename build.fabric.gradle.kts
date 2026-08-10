@@ -223,7 +223,7 @@ dependencies {
 
     // Jade
     modCompileOnly("maven.modrinth:jade:${mod.dep("jade")}")
-    modLocalRuntime("maven.modrinth:jade:${mod.dep("jade")}")
+//    modLocalRuntime("maven.modrinth:jade:${mod.dep("jade")}")
 
     // Xaero's Minimap
     modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
@@ -240,25 +240,29 @@ dependencies {
 
     // Cardinal Components
     if (hasProperty("deps.cca") && stonecutter.eval(mcVersion, ">1.21")) {
-        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cca")}")
-        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cca")}")
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cca")}")
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cca")}")
     }
     else if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
     } else if (stonecutter.eval(mcVersion, "<1.21")) {
-        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
-        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
     // Trinkets
     if (stonecutter.eval(mcVersion, ">26")) {
-        implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
+        modCompileOnly("eu.pb4:trinkets:${mod.dep("trinkets")}")
     } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     }
 
-    modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${mod.dep("forge_config_api_port")}")
+    if (stonecutter.eval(mcVersion, ">26.2")) {
+        modCompileOnly("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${mod.dep("forge_config_api_port")}")
+    } else {
+        modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${mod.dep("forge_config_api_port")}")
+    }
 
     // Antique Atlases
     if (hasProperty("deps.antique_atlas")) {
@@ -291,7 +295,7 @@ dependencies {
     // Player Locator Bar Backports
     modCompileOnly("maven.modrinth:bplb:v1.1.1")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
-    modLocalRuntime("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
+//    modLocalRuntime("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

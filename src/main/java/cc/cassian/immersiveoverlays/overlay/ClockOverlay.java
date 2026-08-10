@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.ClientUtil;
 import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
@@ -47,11 +48,7 @@ public class ClockOverlay {
             *///?} else {
             if (mc.level.dimensionType().natural()) {
             //?}
-                //? >26 {
-                /*time = getTime(mc.level.clockManager().getTotalTicks(mc.level.registryAccess().getOrThrow(WorldClocks.OVERWORLD)));
-                *///?} else {
-                time = getTime(mc.level.getDayTime());
-                //?}
+                time = getTime(ClientUtil.getOverworldTime());
                 if (time.length() == 4) {
                     time = " " + time;
                 }
@@ -129,11 +126,7 @@ public class ClockOverlay {
     public static String getWeather(Player player) {
         var level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
-        //? >26 {
-        /*var time = level.clockManager().getTotalTicks(level.registryAccess().getOrThrow(WorldClocks.OVERWORLD)) % 24000;
-        *///?} else {
-        var time = level.getDayTime() % 24000;
-        //?}
+        var time = ClientUtil.getOverworldTime() % 24000;
         //? if >1.21.2 {
         /*var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
         var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());

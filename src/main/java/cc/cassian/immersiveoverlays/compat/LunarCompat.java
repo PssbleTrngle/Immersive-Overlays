@@ -10,7 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 public class LunarCompat {
 	public static MoonOverlay.MoonPhase get(ClientLevel level) {
 		if (MoonHandler.isEventActive()) {
+			//? if >1.21 {
 			ResourceLocation moonID = ResourceLocation.parse(MoonHandlerAccessor.getMoonID());
+			//?} else {
+			/*ResourceLocation moonID = new ResourceLocation(MoonHandlerAccessor.getMoonID());
+			*///?}
 			if (moonID.getPath().equals("regular")) return null;
 			return new MoonOverlay.MoonPhase(moonID.getPath(), MoonOverlay.MoonPhase.getText(moonID), MoonHandler.getMoonColor());
 		}

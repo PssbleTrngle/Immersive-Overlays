@@ -210,7 +210,7 @@ public class ClockOverlay {
     }
 
     public static boolean isVisible() {
-        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons();
+        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons() || (ModConfig.get().moon_reduced_info && MoonOverlay.showMoon);
     }
 
     public record Season(String sprite, Component name) {

@@ -126,6 +126,11 @@
   "config.immersiveoverlays.moon_text_colour_from_events.tooltip": "Allow Lunar Events to change the colour of the text overlay. This may be harder to read when using some mods.",
   "config.immersiveoverlays.moon_horizontal_position_left": "Align overlay to left edge",
   "config.immersiveoverlays.moon_vertical_position": "Moon overlay position",
+  "config.immersiveoverlays.moon_reduced_info": "Moon Reduced Info",
+  "config.immersiveoverlays.moon_reduced_info.tooltip": "Combine Moon Overlay with Clock Overlay, hiding the text.",
+  "config.immersiveoverlays.moon_only_at_night": "Moon Overlay At Night",
+  "config.immersiveoverlays.moon_only_at_night.tooltip": "Moon Overlay At Night",
+
   "config.immersiveoverlays.render_background": "Show background",
   "config.immersiveoverlays.render_endcap": "Show background endcap",
   "config.immersiveoverlays.render_endcap.tooltip": "Removes the endcap from the right side. Best used with a resource pack that squares off the left edge.",

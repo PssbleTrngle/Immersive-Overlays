@@ -11,6 +11,7 @@ public class LunarCompat {
 	public static MoonOverlay.MoonPhase get(ClientLevel level) {
 		if (MoonHandler.isEventActive()) {
 			ResourceLocation moonID = ResourceLocation.parse(MoonHandlerAccessor.getMoonID());
+			if (moonID.getPath().equals("regular")) return null;
 			return new MoonOverlay.MoonPhase(moonID.getPath(), MoonOverlay.MoonPhase.getText(moonID), MoonHandler.getMoonColor());
 		}
 		return null;

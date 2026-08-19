@@ -14,7 +14,9 @@ import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -98,14 +100,11 @@ public class MoonOverlay {
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.shouldCancelRender(mc))
             return;
-        if (mc.level == null || mc.player == null) return;
+        if (mc.level == null || mc.player == null || ModConfig.get().moon_reduced_info) return;
+        if (ModConfig.get().moon_only_at_night && !ClockOverlay.getWeather(mc.player).contains("moon")) return;
 
-        MoonPhase moonPhase;
-        if (OverlayHelpers.timePassesNaturally(mc.level)) {
-            moonPhase = MoonPhase.getPhase(mc.level);
-        } else {
-            return;
-        }
+        MoonPhase moonPhase = getPhase(mc.level);
+        if (moonPhase == null) return;
 
         int xOffset = 3;
         // The amount of offset needed to display the moon icons.
@@ -123,12 +122,24 @@ public class MoonOverlay {
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().moon_horizontal_position_left);
         // render text
         HudUtils.drawString(guiGraphics, mc.font, moonPhase.text, xPlacement-xOffset+iconXOffset, yPlacement+2, moonPhase.color);
-        if (Minecraft.getInstance().getResourceManager().getResource(ModClient.locate("textures/gui/sprites/%s.png".formatted(moonPhase.sprite))).isPresent()) {
-            OverlayHelpers.blitSprite(guiGraphics, moonPhase.sprite(), xPlacement-xOffset-1, yPlacement-1);
-        } else {
-            OverlayHelpers.blitSprite(guiGraphics, "moon_phase/event_moon", xPlacement-xOffset-1, yPlacement-1);
-        }
+        blitSprite(guiGraphics, moonPhase, xPlacement, xOffset, yPlacement);
+    }
 
+    static @Nullable MoonPhase getPhase(ClientLevel level) {
+        if (OverlayHelpers.timePassesNaturally(level)) {
+            return MoonPhase.getPhase(level);
+        } else {
+            return null;
+        }
+    }
+
+    protected static void blitSprite(GuiGraphics guiGraphics, @Nullable MoonPhase moonPhase, int xPlacement, int xOffset, int yPlacement) {
+        if (moonPhase == null) return;
+        if (Minecraft.getInstance().getResourceManager().getResource(ModClient.locate("textures/gui/sprites/%s.png".formatted(moonPhase.sprite))).isPresent()) {
+            OverlayHelpers.blitSprite(guiGraphics, moonPhase.sprite(), xPlacement - xOffset -1, yPlacement -1);
+        } else {
+            OverlayHelpers.blitSprite(guiGraphics, "moon_phase/event_moon", xPlacement - xOffset -1, yPlacement -1);
+        }
     }
 
     public static boolean isVisible() {

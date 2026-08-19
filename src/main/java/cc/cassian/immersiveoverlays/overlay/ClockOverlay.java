@@ -93,8 +93,13 @@ public class ClockOverlay {
             // render text
             HudUtils.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
-        if (showWeather) {
-            OverlayHelpers.blitSprite(guiGraphics, getWeather(mc.player), xPlacement-xOffset-1, iconYPlacement-1);
+        if (showWeather || MoonOverlay.showMoon) {
+            var weather = getWeather(mc.player);
+            if (ModConfig.get().moon_reduced_info && weather.contains("moon")) {
+                MoonOverlay.blitSprite(guiGraphics, MoonOverlay.getPhase(mc.level), xPlacement, xOffset, yPlacement);
+            } else if (showWeather) {
+                OverlayHelpers.blitSprite(guiGraphics, weather, xPlacement-xOffset-1, iconYPlacement-1);
+            }
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;

@@ -77,13 +77,11 @@ public class ClockOverlay {
         }
 
         int fontWidth = mc.font.width(time)+iconXOffset;
-        Component seasonText = null;
-        String seasonString = null;
+        Season season = Season.UNKNOWN;
 
         if (shouldShowSeasons()) {
-            seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
-            seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
-            fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
+            season = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
+            fontWidth = Integer.max(mc.font.width(time), mc.font.width(season.name))+iconXOffset;
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
@@ -106,9 +104,8 @@ public class ClockOverlay {
             if (showFirstLine) {
                 seasonTextYPlacement+=15;
             }
-            HudUtils.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
-            assert seasonString != null;
-            var sprite = getSprite(seasonString.toLowerCase(Locale.ROOT));
+            HudUtils.drawString(guiGraphics, mc.font, season.name, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
+            var sprite = getSprite(season.sprite);
             HudUtils.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonTextYPlacement-4);
         }
     }
@@ -129,11 +126,7 @@ public class ClockOverlay {
         var precipitation = biome.getPrecipitationAt(player.blockPosition());
         var snows = biome.coldEnoughToSnow(player.blockPosition());
          //?}
-        //? if >1.21.10 {
-        /*if (!level.dimension().equals(Level.OVERWORLD)) {
-        *///?} else {
-        if (!level.dimensionType().natural()) {
-        //?}
+        if (!OverlayHelpers.timePassesNaturally(level)) {
             return "nether"; // Netherlike
         } else if (level.isThundering()) {
             if (snows) return "snow"; // Snowing
@@ -188,8 +181,8 @@ public class ClockOverlay {
         return false;
     }
 
-    public static String getSeason(ClientLevel level, BlockPos pos) {
-        String season = "unknown";
+    public static Season getSeason(ClientLevel level, BlockPos pos) {
+        Season season = Season.UNKNOWN;
         if (ModConfig.get().clock_seasons && showSeason) {
             if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = SereneSeasonsCompat.getSeason(level, pos);
@@ -198,18 +191,18 @@ public class ClockOverlay {
                 season = FabricSeasonsCompat.getSeason(level);
             }
             if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
-                season = SimpleSeasonsCompat.getSeason(level);
+                season = new Season(SimpleSeasonsCompat.getSeason(level));
             }
             //? if forge || neoforge {
             /*if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
                 var tfcCompat = TerrafirmacraftCompat.getSeason(level);
-                if (tfcCompat != null) season = tfcCompat;
+                if (tfcCompat != null) season = new Season(tfcCompat);
             }
             *///?}
             //? if (forge || neoforge) {
              /*if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
-                if (eclipticCompat != null) season = eclipticCompat;
+                if (eclipticCompat != null) season = new Season(eclipticCompat);
             }
             *///?}
         }
@@ -218,5 +211,22 @@ public class ClockOverlay {
 
     public static boolean isVisible() {
         return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons();
+    }
+
+    public record Season(String sprite, Component name) {
+        public Season(String sprite, Component name) {
+            this.sprite = sprite.toLowerCase(Locale.ROOT);
+            this.name = name;
+        }
+
+        public Season(String sprite) {
+            this(sprite, createSeasonText(sprite.toLowerCase(Locale.ROOT)));
+        }
+
+        public static Component createSeasonText(String sprite) {
+            return Component.translatableWithFallback("gui.c.season."+sprite, WordUtils.capitalizeFully(sprite.replace("_", " ")));
+        }
+
+        public static final Season UNKNOWN = new Season("unknown");
     }
 }

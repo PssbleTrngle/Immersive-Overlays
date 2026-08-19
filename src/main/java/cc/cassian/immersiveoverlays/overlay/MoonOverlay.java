@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.EnhancedCelestials2Compat;
 import cc.cassian.immersiveoverlays.compat.EnhancedCelestials1Compat;
+import cc.cassian.immersiveoverlays.compat.LunarCompat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.mru.client.util.HudUtils;
@@ -34,7 +35,10 @@ public class MoonOverlay {
 		public MoonPhase(String sprite, Component text, int color) {
             this.sprite = "moon_phase/" + sprite.toLowerCase(Locale.ROOT);
             this.text = text;
-            this.color = color;
+            if (ModConfig.get().moon_text_colour_from_events)
+                this.color = color;
+            else
+                this.color = defaultColour();
 		}
 
         public static int defaultColour() {
@@ -65,6 +69,12 @@ public class MoonOverlay {
             }
             if (ModCompat.ENHANCED_CELESTIALS_2) {
                 MoonPhase phase = EnhancedCelestials2Compat.get(level);
+                if (phase != null) {
+                    return phase;
+                }
+            }
+            if (ModCompat.LUNAR) {
+                MoonPhase phase = LunarCompat.get(level);
                 if (phase != null) {
                     return phase;
                 }

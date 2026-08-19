@@ -260,6 +260,7 @@ dependencies {
     modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
     modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
 //    implementation("dev.corgitaco:TimeCore-forge:1.0.0-b")
+    modCompileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

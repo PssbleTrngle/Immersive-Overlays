@@ -281,6 +281,11 @@ dependencies {
     if (hasProperty("deps.enhanced_celestials_2")) {
         compileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
     }
+    if (hasProperty("deps.lunar")) {
+        compileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")
+    } else {
+        compileOnly("maven.modrinth:lunar:NJaeuXnp")
+    }
 
     compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
     compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")

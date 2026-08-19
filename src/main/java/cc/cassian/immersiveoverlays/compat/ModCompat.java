@@ -44,6 +44,11 @@ public class ModCompat {
      */
     public static final boolean LEGENDARY_SURVIVAL_OVERHAUL = Platform.INSTANCE.isLoaded("legendarysurvivaloverhaul");
     /**
+     * Lunar - used for Moon Overlays.
+     * Multiplatform
+     */
+    public static final boolean LUNAR = Platform.INSTANCE.isLoaded("lunar");
+    /**
      * Map Atlases - a minimap mod modified to check for items inside containers.
      * Multiplatform
      */

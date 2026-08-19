@@ -294,6 +294,13 @@ dependencies {
         modCompileOnly("maven.modrinth:enhanced-celestials:8Jl5X4ms")
     }
 
+    if (hasProperty("deps.lunar")) {
+        modCompileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")
+        modLocalRuntime("maven.modrinth:lunar:${mod.dep("lunar")}")
+    } else {
+        modCompileOnly("maven.modrinth:lunar:NJaeuXnp")
+    }
+
     if (hasProperty("deps.enhanced_celestials_2")) {
         modCompileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
     } else {
@@ -301,8 +308,8 @@ dependencies {
     }
 
     if (hasProperty("deps.enhanced_celestials_2_lunar_events")) {
-        modLocalRuntime("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
-        modLocalRuntime("maven.modrinth:enhanced-celestials-2-default-lunar-events:${mod.dep("enhanced_celestials_2_lunar_events")}")
+//        modLocalRuntime("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+//        modLocalRuntime("maven.modrinth:enhanced-celestials-2-default-lunar-events:${mod.dep("enhanced_celestials_2_lunar_events")}")
 
     }
 

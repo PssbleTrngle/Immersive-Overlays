@@ -69,6 +69,7 @@ Lunar Clocks from the following mods are supported:
 If you are playing with a mod that adds lunar events, these will replace the active moon phase. Supported mods include:
 - [Enhanced Celestials](https://modrinth.com/mod/enhanced-celestials)
 - [Enhanced Celestials 2](https://modrinth.com/mod/enhanced-celestials-2-core)
+- [Lunar](https://modrinth.com/mod/lunar)
 
 Translations and custom icons are present for Enhanced Celestials 1 and 2. Add-ons will have a generic event moon icon and an automatically generated title. To add a new translation, use the format `gui.<namespace>.moon_phase.<path>`.
 

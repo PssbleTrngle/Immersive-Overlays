@@ -166,6 +166,7 @@ public class ModConfig {
     public boolean moon_enable = true;
     public boolean moon_horizontal_position_left = false;
     public int moon_text_colour = -1507334;
+    public boolean moon_text_colour_from_events = true;
     public int moon_vertical_position = 62;
     public List<String> moon_items = List.of("urkazmoontools:moonclock_item", "tide:lunar_calendar", "twilightforest:moon_dial", "spectrum:crescent_clock");
     public List<String> moon_blocks = List.of("tide:lunar_calendar", "urkazmoontools:moonsensor_blockitem");

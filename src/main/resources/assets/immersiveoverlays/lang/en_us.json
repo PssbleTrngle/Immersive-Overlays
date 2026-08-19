@@ -122,6 +122,8 @@
   "config.immersiveoverlays.moon_blocks": "Blocks that show moon overlay",
   "config.immersiveoverlays.moon_blocks.tooltip": "If this list contains no loaded blocks, the time overlay list is used instead.",
   "config.immersiveoverlays.moon_text_colour": "Moon Text Colour",
+  "config.immersiveoverlays.moon_text_colour_from_events": "Moon Text Colour From Events",
+  "config.immersiveoverlays.moon_text_colour_from_events.tooltip": "Allow Lunar Events to change the colour of the text overlay. This may be harder to read when using some mods.",
   "config.immersiveoverlays.moon_horizontal_position_left": "Align overlay to left edge",
   "config.immersiveoverlays.moon_vertical_position": "Moon overlay position",
   "config.immersiveoverlays.render_background": "Show background",

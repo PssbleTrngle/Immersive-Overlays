@@ -62,6 +62,9 @@ public class ClockOverlay {
         int iconXOffset = 0;
         int tooltipSize = 16;
         int yPlacement = ModConfig.get().clock_vertical_position;
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
+            yPlacement += OverlayHelpers.moveBy(mc.player);
+        }
         int iconYPlacement = yPlacement;
         int textYPlacement = yPlacement;
         if (showWeather) {
@@ -89,11 +92,6 @@ public class ClockOverlay {
             seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
             seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
             fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
-        }
-
-        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
-            iconYPlacement += OverlayHelpers.moveBy(mc.player);
-            textYPlacement += OverlayHelpers.moveBy(mc.player);
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();

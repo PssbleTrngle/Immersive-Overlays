@@ -24,6 +24,7 @@ public class ModLists {
     public static ArrayList<Item> temperature_items = new ArrayList<>();
     public static ArrayList<Item> speed_items = new ArrayList<>();
     public static ArrayList<Item> wind_items = new ArrayList<>();
+    public static ArrayList<Item> moon_items = new ArrayList<>();
     public static ArrayList<Item> waila_items = new ArrayList<>();
 
     public static ArrayList<Block> important_blocks = new ArrayList<>();
@@ -38,6 +39,7 @@ public class ModLists {
     public static ArrayList<Block> temperature_blocks = new ArrayList<>();
     public static ArrayList<Block> speed_blocks = new ArrayList<>();
     public static ArrayList<Block> wind_blocks = new ArrayList<>();
+    public static ArrayList<Block> moon_blocks = new ArrayList<>();
     public static ArrayList<Block> waila_blocks = new ArrayList<>();
 
 
@@ -59,6 +61,7 @@ public class ModLists {
         addAll(registry, ModConfig.get().temperature_items, temperature_items);
         addAll(registry, ModConfig.get().speed_items, speed_items);
         addAll(registry, ModConfig.get().wind_items, wind_items);
+        addAll(registry, ModConfig.get().moon_items, moon_items);
         addAll(registry, ModConfig.get().compat_waila_items, waila_items);
     }
 
@@ -75,6 +78,7 @@ public class ModLists {
         important_blocks.addAll(addAll(registry, ModConfig.get().temperature_blocks, temperature_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().speed_blocks, speed_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().wind_blocks, wind_blocks));
+        important_blocks.addAll(addAll(registry, ModConfig.get().moon_blocks, moon_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().compat_waila_blocks, waila_blocks));
     }
 

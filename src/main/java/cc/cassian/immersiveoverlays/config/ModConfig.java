@@ -162,8 +162,15 @@ public class ModConfig {
     public boolean compat_dead_reckoning = true;
     public int compass_lodestone_colour = -1500560;
     public int compass_recovery_colour = -7405585;
+    // moon
+    public boolean moon_enable = true;
+    public boolean moon_horizontal_position_left = true;
+    public Integer moon_text_colour = -7405585;
+    public int moon_vertical_position = 90;
+    public List<String> moon_items = List.of("minecraft:clock");
+    public List<String> moon_blocks = List.of();
 
-	public static void load() {
+    public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;

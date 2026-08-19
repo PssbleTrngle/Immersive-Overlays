@@ -240,8 +240,8 @@ dependencies {
 
     // Cardinal Components
     if (hasProperty("deps.cca") && stonecutter.eval(mcVersion, ">1.21")) {
-        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cca")}")
-        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cca")}")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cca")}")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cca")}")
     }
     else if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")

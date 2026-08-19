@@ -58,6 +58,7 @@ public class ModClient {
         Object event = null;
         Platform.registerOverlay(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent, event);
         Platform.registerOverlay(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("moon"), MoonOverlay::renderGameOverlayEvent, event);
         Platform.registerOverlay(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent, event);
         Platform.registerOverlay(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent, event);
         Platform.registerOverlay(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent, event);

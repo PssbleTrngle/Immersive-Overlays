@@ -140,6 +140,8 @@ public class OverlayHelpers {
             SpeedOverlay.showSpeed = true;
         if (ModLists.wind_items.contains(item))
             WindOverlay.showWind = true;
+        if (ModLists.moon_items.contains(item))
+            MoonOverlay.showMoon = true;
         if (ModLists.waila_items.contains(item))
             showWaila = true;
         if (ModLists.compass_anchor_items.contains(item)){
@@ -217,6 +219,7 @@ public class OverlayHelpers {
         TemperatureOverlay.showTemperature = b;
         SpeedOverlay.showSpeed = b;
         WindOverlay.showWind = b;
+        MoonOverlay.showMoon = b;
         showWaila = b;
 		if (!b) {
             CompassOverlay.style = CompassOverlay.CompassOverlayStyle.COMPASS;

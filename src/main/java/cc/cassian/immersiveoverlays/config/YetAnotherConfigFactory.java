@@ -52,6 +52,7 @@ public class YetAnotherConfigFactory {
         final var temperatureCategory = createCategory("temperature", categories);
         final var speedCategory = createCategory("speed", categories);
         final var windCategory = createCategory("wind", categories);
+        final var moonCategory = createCategory("moon", categories);
         final var compatCategory = createCategory("compat", categories);
 
         for (var field : ModConfig.class.getFields()) {
@@ -63,6 +64,7 @@ public class YetAnotherConfigFactory {
             else if (is(field,"temperature")) category = temperatureCategory;
             else if (is(field,"speed")) category = speedCategory;
             else if (is(field,"wind")) category = windCategory;
+            else if (is(field,"moon")) category = moonCategory;
             else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
             if (is(field, "version")) {}

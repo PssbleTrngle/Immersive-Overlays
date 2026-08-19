@@ -103,4 +103,6 @@ Textures for No Man's Land, Abundant Atmosphere, and New World biome overlays by
 
 Textures for Clifftree biome overlays by [Kelpiesaurus](https://modrinth.com/user/Kelpiesaurus).
 
+Textures for Bloom biome overlays by [sierra_wx](https://modrinth.com/user/sierra_wx))
+
 This repository contains remapped copies of [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4), as the Fabric version cannot be remapped by ModDevGradle.

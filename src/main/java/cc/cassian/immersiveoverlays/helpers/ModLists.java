@@ -61,7 +61,7 @@ public class ModLists {
         addAll(registry, ModConfig.get().temperature_items, temperature_items);
         addAll(registry, ModConfig.get().speed_items, speed_items);
         addAll(registry, ModConfig.get().wind_items, wind_items);
-        addAll(registry, ModConfig.get().moon_items, moon_items);
+        addAll(registry, ModConfig.get().moon_items, moon_items, clock_items);
         addAll(registry, ModConfig.get().compat_waila_items, waila_items);
     }
 
@@ -78,7 +78,7 @@ public class ModLists {
         important_blocks.addAll(addAll(registry, ModConfig.get().temperature_blocks, temperature_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().speed_blocks, speed_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().wind_blocks, wind_blocks));
-        important_blocks.addAll(addAll(registry, ModConfig.get().moon_blocks, moon_blocks));
+        important_blocks.addAll(addAll(registry, ModConfig.get().moon_blocks, moon_blocks, clock_blocks));
         important_blocks.addAll(addAll(registry, ModConfig.get().compat_waila_blocks, waila_blocks));
     }
 

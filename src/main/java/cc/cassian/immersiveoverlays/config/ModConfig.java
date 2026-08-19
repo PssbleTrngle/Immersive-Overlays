@@ -57,7 +57,7 @@ public class ModConfig {
     public int compass_y_colour = 5635925;
     public int compass_z_colour = 5592575;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
-    public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
+    public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter","reduced_world_infos:altimeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
     public List<String> compass_anchor_items = List.of("minecraft:compass", "minecraft:recovery_compass");
     public boolean compass_relative_pos = true;
@@ -76,7 +76,7 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
-    public List<String> clock_day_count_items = List.of();
+    public List<String> clock_day_count_items = List.of("reduced_world_infos:attuned_clock");
     public List<String> clock_blocks = List.of("supplementaries:clock_block");
     public List<String> clock_weather_blocks = List.of();
     public List<String> clock_day_count_blocks = List.of();
@@ -119,7 +119,7 @@ public class ModConfig {
     public int biome_text_colour = 14737632;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
-    public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
+    public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas", "reduced_world_infos:biome_recognizer");
     public List<String> biome_blocks = List.of();
 
     // seasons
@@ -164,11 +164,11 @@ public class ModConfig {
     public int compass_recovery_colour = -7405585;
     // moon
     public boolean moon_enable = true;
-    public boolean moon_horizontal_position_left = true;
-    public Integer moon_text_colour = -7405585;
-    public int moon_vertical_position = 90;
-    public List<String> moon_items = List.of("minecraft:clock");
-    public List<String> moon_blocks = List.of();
+    public boolean moon_horizontal_position_left = false;
+    public int moon_text_colour = -1507334;
+    public int moon_vertical_position = 62;
+    public List<String> moon_items = List.of("urkazmoontools:moonclock_item", "tide:lunar_calendar", "twilightforest:moon_dial", "spectrum:crescent_clock");
+    public List<String> moon_blocks = List.of("tide:lunar_calendar", "urkazmoontools:moonsensor_blockitem");
 
     public static void load() {
         if (!Files.exists(configPath())) {

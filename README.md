@@ -56,6 +56,22 @@ An overlay displaying wind intensity and direction is displayed whenever the pla
 
 - With [Breezy](https://modrinth.com/mod/breezy) installed, this data is sourced from the Gust Gauge.
 
+## Moon Overlays
+
+An overlay displaying the current phase of the moon is displayed whenever the player has a compatible lunar clock in their inventory, including in a bundle. If no item is available, a vanilla clock is sufficient to show the overlay.
+
+Lunar Clocks from the following mods are supported:
+- [Spectrum](https://modrinth.com/mod/spectrum)'s Crescent Clock
+- [Urkaz Moon Tools](https://modrinth.com/mod/urkaz-moon-tools)'s Lunar Clock
+- [Tide 2](https://modrinth.com/mod/tide)'s Lunar Calendar
+- [Twilight Forest](https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest/)'s Moon Dial
+
+If you are playing with a mod that adds lunar events, these will replace the active moon phase. Supported mods include:
+- [Enhanced Celestials](https://modrinth.com/mod/enhanced-celestials)
+- [Enhanced Celestials 2](https://modrinth.com/mod/enhanced-celestials-2-core)
+
+Translations and custom icons are present for Enhanced Celestials 1 and 2. Add-ons will have a generic event moon icon and an automatically generated title. To add a new translation, use the format `gui.c.moon_phase.<path>`.
+
 ## Mod Compatibility
 
 The mod has support for [Spelunkery](https://modrinth.com/mod/spelunkery), [Caverns & Chasms](https://modrinth.com/mod/caverns-and-chasms), and [Supplementaries](https://modrinth.com/mod/supplementaries) items out of the box. For other mods, items can be added to the mod's various config options.

@@ -19,7 +19,7 @@ public class ModClient {
     public static final String MOD_ID = "immersiveoverlays";
     public static final String MOD_NAME = "Immersive Overlays";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-    public static final int CONFIG_VERSION = 4;
+    public static final int CONFIG_VERSION = 5;
     public static boolean DEBUG = false;
 
     //? if >1.21.8 {

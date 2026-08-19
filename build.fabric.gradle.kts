@@ -288,12 +288,28 @@ dependencies {
 
     if (hasProperty("deps.enhanced_celestials")) {
         modCompileOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
-        modLocalRuntime("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
-        modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
-        modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+//        modLocalRuntime("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
         modImplementation("dev.corgitaco:TimeCore-fabric-1.21.1:1.0.1")
     } else {
         modCompileOnly("maven.modrinth:enhanced-celestials:8Jl5X4ms")
+    }
+
+    if (hasProperty("deps.enhanced_celestials_2")) {
+        modCompileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+    }
+
+    if (hasProperty("deps.enhanced_celestials_2_lunar_events")) {
+        modLocalRuntime("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+        modLocalRuntime("maven.modrinth:enhanced-celestials-2-default-lunar-events:${mod.dep("enhanced_celestials_2_lunar_events")}")
+
+    }
+
+    if (hasProperty("deps.corgilib")) {
+        modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
+    }
+
+    if (hasProperty("deps.data_anchor")) {
+        modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
     }
 
     // Tiered Backpacks

@@ -24,6 +24,11 @@ public class ModCompat {
 	 */
     public static final boolean ENHANCED_CELESTIALS = Platform.INSTANCE.isLoaded("enhancedcelestials");
     /**
+     * Enhanced Celestials 2 - used for Moon Overlays.
+     * Multiplatform
+     */
+    public static final boolean ENHANCED_CELESTIALS_2 = Platform.INSTANCE.isLoaded("enhancedcelestials2core");
+    /**
      * Fabric API - used for its client tag API.
      * Multiplatform (Forgified Fabric API)
      */

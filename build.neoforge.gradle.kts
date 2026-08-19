@@ -278,6 +278,10 @@ dependencies {
         compileOnly("maven.modrinth:enhanced-celestials:8Jl5X4ms")
     }
 
+    if (hasProperty("deps.enhanced_celestials_2")) {
+        compileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+    }
+
     compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
     compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
     compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")

@@ -1,5 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.compat.EnhancedCelestials2Compat;
 import cc.cassian.immersiveoverlays.compat.EnhancedCelestialsCompat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
@@ -8,11 +10,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Locale;
 
 public class MoonOverlay {
-    public record MoonPhase(String sprite, Component text) {
+    public record MoonPhase(String sprite, Component text, int color) {
 
         public static MoonPhase FULL_MOON = new MoonPhase("full_moon");
         public static MoonPhase WANING_GIBBOUS = new MoonPhase("waning_gibbous");
@@ -25,18 +29,33 @@ public class MoonOverlay {
 
         public static MoonPhase[] PHASES = new MoonPhase[]{FULL_MOON, WANING_GIBBOUS, THIRD_QUARTER, WANING_CRESCENT, NEW_MOON, WAXING_CRESCENT, FIRST_QUARTER, WAXING_GIBBOUS};
 
-		public MoonPhase(String sprite, Component text) {
+		public MoonPhase(String sprite, Component text, int color) {
             this.sprite = "moon_phase/" + sprite.toLowerCase(Locale.ROOT);
             this.text = text;
+            this.color = color;
 		}
+
+        public static int defaultColour() {
+            return ModConfig.get().moon_text_colour;
+        }
 
         public MoonPhase(String sprite) {
-			this(sprite, Component.translatable("gui.c.moon_phase." + sprite));
+			this(sprite, getText(sprite), defaultColour());
 		}
 
-		public static MoonPhase getPhase(ClientLevel level) {
+        public static MutableComponent getText(String sprite) {
+            return Component.translatableWithFallback("gui.c.moon_phase." + sprite, WordUtils.capitalize(sprite.replace("_", " ")));
+        }
+
+        public static MoonPhase getPhase(ClientLevel level) {
             if (ModCompat.ENHANCED_CELESTIALS) {
                 MoonPhase phase = EnhancedCelestialsCompat.get(level);
+                if (phase != null) {
+                    return phase;
+                }
+            }
+            if (ModCompat.ENHANCED_CELESTIALS_2) {
+                MoonPhase phase = EnhancedCelestials2Compat.get(level);
                 if (phase != null) {
                     return phase;
                 }
@@ -88,8 +107,13 @@ public class MoonOverlay {
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().moon_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().moon_horizontal_position_left);
         // render text
-        HudUtils.drawString(guiGraphics, mc.font, moonPhase.text, xPlacement-xOffset+iconXOffset, yPlacement+2, ModConfig.get().moon_text_colour);
-        OverlayHelpers.blitSprite(guiGraphics, moonPhase.sprite(), xPlacement-xOffset-1, yPlacement-1);
+        HudUtils.drawString(guiGraphics, mc.font, moonPhase.text, xPlacement-xOffset+iconXOffset, yPlacement+2, moonPhase.color);
+        if (Minecraft.getInstance().getResourceManager().getResource(ModClient.locate("textures/gui/sprites/%s.png".formatted(moonPhase.sprite))).isPresent()) {
+            OverlayHelpers.blitSprite(guiGraphics, moonPhase.sprite(), xPlacement-xOffset-1, yPlacement-1);
+        } else {
+            OverlayHelpers.blitSprite(guiGraphics, "moon_phase/event_moon", xPlacement-xOffset-1, yPlacement-1);
+        }
+
     }
 
     public static boolean isVisible() {

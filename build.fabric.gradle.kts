@@ -163,6 +163,13 @@ repositories {
             includeGroupAndSubgroups("xyz.nucleoid")
         }
     }
+    maven {
+        name = "CorgiLib"
+        url = uri("https://maven.jt-dev.tech/releases")
+        content {
+            includeGroupAndSubgroups("dev.corgitaco")
+        }
+    }
     mavenCentral()
 
 }
@@ -277,6 +284,16 @@ dependencies {
     }
     if (hasProperty("deps.surveyor")) {
         modLocalRuntime("maven.modrinth:surveyor:${mod.dep("surveyor")}")
+    }
+
+    if (hasProperty("deps.enhanced_celestials")) {
+        modCompileOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+        modLocalRuntime("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+        modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
+        modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+        modImplementation("dev.corgitaco:TimeCore-fabric-1.21.1:1.0.1")
+    } else {
+        modCompileOnly("maven.modrinth:enhanced-celestials:8Jl5X4ms")
     }
 
     // Tiered Backpacks

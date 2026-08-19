@@ -155,6 +155,13 @@ repositories {
             includeGroup("com.eliotlash.mclib")
         }
     }
+    maven {
+        name = "CorgiLib"
+        url = uri("https://maven.jt-dev.tech/releases")
+        content {
+            includeGroupAndSubgroups("dev.corgitaco")
+        }
+    }
     flatDir { dirs("libs") }
 }
 
@@ -247,6 +254,11 @@ dependencies {
     // Backpacked
     modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
     modImplementation("curse.maven:framework-549225:${mod.dep("framework")}")
+
+    modImplementation("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+    modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
+    modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+//    implementation("dev.corgitaco:TimeCore-forge:1.0.0-b")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

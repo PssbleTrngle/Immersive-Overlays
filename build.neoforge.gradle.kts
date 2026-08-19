@@ -147,6 +147,13 @@ repositories {
             }
         }
     }
+    maven {
+        name = "CorgiLib"
+        url = uri("https://maven.jt-dev.tech/releases")
+        content {
+            includeGroupAndSubgroups("dev.corgitaco")
+        }
+    }
     flatDir { dirs("libs") }
     mavenCentral()
 }
@@ -253,12 +260,22 @@ dependencies {
         runtimeOnly("maven.modrinth:oreganized:${property("deps.oreganized")}")
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
         implementation("curse.maven:legendary-survival-overhaul-840254:7278267")
-        runtimeOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
+//        runtimeOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
         runtimeOnly("maven.modrinth:patchouli:h6hKI2ob")
         runtimeOnly("curse.maven:ecliptic-seasons-1118306:7041469")
         compileOnly("maven.local:antique-atlas:2.12.0+1.21_mapped_moj_1.21.1")
         compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
         compileOnly("maven.local:fabric-seasons:2.4.2-BETA+1.21_mapped_moj_1.21.1")
+    }
+
+    if (hasProperty("deps.enhanced_celestials")) {
+        compileOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+        runtimeOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+        implementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
+        implementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+        implementation("dev.corgitaco:TimeCore-neoforge-1.21.1:1.0.1")
+    } else {
+        compileOnly("maven.modrinth:enhanced-celestials:8Jl5X4ms")
     }
 
     compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")

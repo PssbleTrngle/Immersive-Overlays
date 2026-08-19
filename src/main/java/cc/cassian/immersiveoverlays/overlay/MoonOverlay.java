@@ -1,5 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.compat.EnhancedCelestialsCompat;
+import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.mru.client.util.HudUtils;
 import net.minecraft.client.Minecraft;
@@ -10,22 +12,41 @@ import net.minecraft.network.chat.Component;
 import java.util.Locale;
 
 public class MoonOverlay {
-    public enum MoonPhase {
-        FULL_MOON(0, "full_moon"),
-        WANING_GIBBOUS(1, "waning_gibbous"),
-        THIRD_QUARTER(2, "third_quarter"),
-        WANING_CRESCENT(3, "waning_crescent"),
-        NEW_MOON(4, "new_moon"),
-        WAXING_CRESCENT(5, "waxing_crescent"),
-        FIRST_QUARTER(6, "first_quarter"),
-        WAXING_GIBBOUS(7, "waxing_gibbous");
+    public record MoonPhase(String sprite, Component text) {
 
-		MoonPhase(int phase, String name) {
+        public static MoonPhase FULL_MOON = new MoonPhase("full_moon");
+        public static MoonPhase WANING_GIBBOUS = new MoonPhase("waning_gibbous");
+        public static MoonPhase THIRD_QUARTER = new MoonPhase("third_quarter");
+        public static MoonPhase WANING_CRESCENT = new MoonPhase("waning_crescent");
+        public static MoonPhase NEW_MOON = new MoonPhase("new_moon");
+        public static MoonPhase WAXING_CRESCENT = new MoonPhase("waxing_crescent");
+        public static MoonPhase FIRST_QUARTER = new MoonPhase("first_quarter");
+        public static MoonPhase WAXING_GIBBOUS = new MoonPhase("waxing_gibbous");
 
-        }
+        public static MoonPhase[] PHASES = new MoonPhase[]{FULL_MOON, WANING_GIBBOUS, THIRD_QUARTER, WANING_CRESCENT, NEW_MOON, WAXING_CRESCENT, FIRST_QUARTER, WAXING_GIBBOUS};
+
+		public MoonPhase(String sprite, Component text) {
+            this.sprite = "moon_phase/" + sprite.toLowerCase(Locale.ROOT);
+            this.text = text;
+		}
+
+        public MoonPhase(String sprite) {
+			this(sprite, Component.translatable("gui.c.moon_phase." + sprite));
+		}
 
 		public static MoonPhase getPhase(ClientLevel level) {
-			return values()[level.getMoonPhase()];
+            if (ModCompat.ENHANCED_CELESTIALS) {
+                MoonPhase phase = EnhancedCelestialsCompat.get(level);
+                if (phase != null) {
+                    return phase;
+                }
+            }
+            //? if >26 {
+            /*int phase = level.environmentAttributes().getDimensionValue(net.minecraft.world.attribute.EnvironmentAttributes.MOON_PHASE).index();
+            *///?} else {
+            int phase = level.getMoonPhase();
+            //?}
+			return PHASES[phase];
 		}
 	}
 
@@ -41,38 +62,34 @@ public class MoonOverlay {
             return;
         if (mc.level == null || mc.player == null) return;
 
-        String moonPhase = "";
-        Component moonPhaseText = Component.empty();
+        MoonPhase moonPhase;
         //? if >1.21.10 {
         /*if (!mc.level.dimensionType().hasFixedTime()) {
         *///?} else {
         if (mc.level.dimensionType().natural()) {
         //?}
-            moonPhase = MoonPhase.getPhase(mc.level).name().toLowerCase(Locale.ROOT);
-            moonPhaseText = Component.translatable("gui.c.moon_phase." + moonPhase);
+            moonPhase = MoonPhase.getPhase(mc.level);
+        } else {
+            return;
         }
 
         int xOffset = 3;
-        // The amount of offset needed to display the moon icons, if visible.
+        // The amount of offset needed to display the moon icons.
         int iconXOffset = 20;
         int tooltipSize = 21;
         int yPlacement = ModConfig.get().moon_vertical_position;
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().moon_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
-        int iconYPlacement = yPlacement;
-        int textYPlacement = yPlacement + 2;
 
-        int fontWidth = mc.font.width(moonPhaseText)+iconXOffset;
-
-
+        int fontWidth = mc.font.width(moonPhase.text)+iconXOffset;
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().moon_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().moon_horizontal_position_left);
         // render text
-        HudUtils.drawString(guiGraphics, mc.font, moonPhaseText, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().moon_text_colour);
-        OverlayHelpers.blitSprite(guiGraphics,"moon_phase_" +  moonPhase, xPlacement-xOffset-1, iconYPlacement-1);
+        HudUtils.drawString(guiGraphics, mc.font, moonPhase.text, xPlacement-xOffset+iconXOffset, yPlacement+2, ModConfig.get().moon_text_colour);
+        OverlayHelpers.blitSprite(guiGraphics, moonPhase.sprite(), xPlacement-xOffset-1, yPlacement-1);
     }
 
     public static boolean isVisible() {

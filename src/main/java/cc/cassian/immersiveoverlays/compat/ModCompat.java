@@ -19,6 +19,11 @@ public class ModCompat {
      */
     public static final boolean ECLIPTIC_SEASONS = Platform.INSTANCE.isLoaded("eclipticseasons");
     /**
+	 * Enhanced Celestials - used for Moon Overlays.
+     * Multiplatform
+	 */
+    public static final boolean ENHANCED_CELESTIALS = Platform.INSTANCE.isLoaded("enhancedcelestials");
+    /**
      * Fabric API - used for its client tag API.
      * Multiplatform (Forgified Fabric API)
      */

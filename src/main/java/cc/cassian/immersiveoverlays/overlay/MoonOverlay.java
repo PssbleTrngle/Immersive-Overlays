@@ -2,15 +2,17 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.EnhancedCelestials2Compat;
-import cc.cassian.immersiveoverlays.compat.EnhancedCelestialsCompat;
+import cc.cassian.immersiveoverlays.compat.EnhancedCelestials1Compat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.mru.client.util.HudUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Locale;
@@ -47,9 +49,16 @@ public class MoonOverlay {
             return Component.translatableWithFallback("gui.c.moon_phase." + sprite, WordUtils.capitalize(sprite.replace("_", " ")));
         }
 
+        public static MutableComponent getText(ResourceLocation sprite) {
+            String formatted = "gui.%s.moon_phase.%s".formatted(sprite.getNamespace(), sprite.getPath());
+            if (Language.getInstance().has(formatted))
+                return Component.translatable(formatted);
+            return getText(sprite.getPath());
+        }
+
         public static MoonPhase getPhase(ClientLevel level) {
             if (ModCompat.ENHANCED_CELESTIALS) {
-                MoonPhase phase = EnhancedCelestialsCompat.get(level);
+                MoonPhase phase = EnhancedCelestials1Compat.get(level);
                 if (phase != null) {
                     return phase;
                 }
@@ -61,7 +70,7 @@ public class MoonOverlay {
                 }
             }
             //? if >26 {
-            /*int phase = level.environmentAttributes().getDimensionValue(net.minecraft.world.attribute.EnvironmentAttributes.MOON_PHASE).index();
+            /*int phase = level.environmentAttributes().getValue(net.minecraft.world.attribute.EnvironmentAttributes.MOON_PHASE, Minecraft.getInstance().player.position()).index();
             *///?} else {
             int phase = level.getMoonPhase();
             //?}
@@ -82,11 +91,7 @@ public class MoonOverlay {
         if (mc.level == null || mc.player == null) return;
 
         MoonPhase moonPhase;
-        //? if >1.21.10 {
-        /*if (!mc.level.dimensionType().hasFixedTime()) {
-        *///?} else {
-        if (mc.level.dimensionType().natural()) {
-        //?}
+        if (OverlayHelpers.timePassesNaturally(mc.level)) {
             moonPhase = MoonPhase.getPhase(mc.level);
         } else {
             return;

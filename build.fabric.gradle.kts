@@ -296,6 +296,8 @@ dependencies {
 
     if (hasProperty("deps.enhanced_celestials_2")) {
         modCompileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+    } else {
+        modCompileOnly("maven.modrinth:enhanced-celestials-2-core:4.0.1.0-fabric")
     }
 
     if (hasProperty("deps.enhanced_celestials_2_lunar_events")) {

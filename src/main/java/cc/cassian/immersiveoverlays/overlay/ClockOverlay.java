@@ -10,15 +10,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-//? >26
-//import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.dimension.DimensionType;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Locale;
@@ -43,11 +39,7 @@ public class ClockOverlay {
         String time = "Hi! ";
         boolean showFirstLine = showTime || showDayCount;
         if (showFirstLine) {
-            //? if >1.21.10 {
-            /*if (!mc.level.dimensionType().hasFixedTime()) {
-            *///?} else {
-            if (mc.level.dimensionType().natural()) {
-            //?}
+            if (OverlayHelpers.timePassesNaturally(mc.level)) {
                 time = getTime(ClientUtil.getOverworldTime());
                 if (time.length() == 4) {
                     time = " " + time;
@@ -62,7 +54,7 @@ public class ClockOverlay {
         int iconXOffset = 0;
         int tooltipSize = 16;
         int yPlacement = ModConfig.get().clock_vertical_position;
-        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().clock_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
         int iconYPlacement = yPlacement;
@@ -122,7 +114,7 @@ public class ClockOverlay {
     }
 
     public static String getWeather(Player player) {
-        var level = player.level();
+		Level level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
         var time = ClientUtil.getOverworldTime() % 24000;
         //? if >1.21.2 {

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
@@ -76,7 +77,7 @@ public class OverlayHelpers {
     *///?}
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
-        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable || ModConfig.get().wind_enable) && minecraft.level != null) {
+        if (ModConfig.get().enabled && (ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable || ModConfig.get().wind_enable || ModConfig.get().moon_enable) && minecraft.level != null) {
             OverlayHelpers.checkPlayerForOverlays(minecraft.player);
         }
     }
@@ -299,6 +300,14 @@ public class OverlayHelpers {
     public static void readAnchor(ItemStack stack) {
         readLodestoneAnchor(stack);
         readRecoveryCompassAnchor(stack);
+    }
+
+    public static boolean timePassesNaturally(Level level) {
+        //? if >1.21.10 {
+        /*return !level.dimensionType().hasFixedTime();
+         *///?} else {
+        return (level.dimensionType().natural());
+        //?}
     }
 
     private static void readLodestoneAnchor(ItemStack stack) {

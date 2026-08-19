@@ -1,8 +1,8 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.overlay.MoonOverlay;
-import dev.corgitaco.enhancedcelestials2core.EnhancedCelestials;
-import dev.corgitaco.enhancedcelestials2core.api.lunarevent.LunarEvent;
+import dev.corgitaco.enhancedcelestials.EnhancedCelestials;
+import dev.corgitaco.enhancedcelestials.api.lunarevent.LunarEvent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
 
-public class EnhancedCelestials2Compat {
+public class EnhancedCelestials1Compat {
 	public static MoonOverlay.MoonPhase get(ClientLevel level) {
 		//? if <26 {
 		var worldDataOptional = EnhancedCelestials.lunarForecastWorldData(level);
@@ -21,7 +21,8 @@ public class EnhancedCelestials2Compat {
 			ResourceLocation location = lunarEventResourceKey.orElseThrow().location();
 			var path = location.getPath();
 			if (!path.equals("default")) {
-				return new MoonOverlay.MoonPhase(path, MoonOverlay.MoonPhase.getText(location), worldData.currentLunarEvent().getNameColor().map(TextColor::getValue).orElse(MoonOverlay.MoonPhase.defaultColour()));
+				LunarEvent lunarEvent = worldData.currentLunarEvent();
+				return new MoonOverlay.MoonPhase(path, lunarEvent.getTextComponents().name().getComponent(), Optional.ofNullable(lunarEvent.getTextComponents().name().getStyle().getColor()).map(TextColor::getValue).orElse(MoonOverlay.MoonPhase.defaultColour()));
 			}
 		}
 		//?}

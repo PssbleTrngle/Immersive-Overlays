@@ -75,6 +75,7 @@ public class ClothConfigFactory {
                 category.addEntry(entryBuilder.startColorField(fieldName(field), (int) fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
                         .setTooltip(fieldTooltip(field))
+                        .setAlphaMode(true)
                         .setDefaultValue((int) fieldGet(DEFAULT_VALUES, field)).build());
             }
             else if (field.getType() == int.class) {

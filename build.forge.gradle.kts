@@ -255,7 +255,8 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
     modImplementation("curse.maven:framework-549225:${mod.dep("framework")}")
 
-    modImplementation("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+    modCompileOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
+    modImplementation("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
     modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
     modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
 //    implementation("dev.corgitaco:TimeCore-forge:1.0.0-b")

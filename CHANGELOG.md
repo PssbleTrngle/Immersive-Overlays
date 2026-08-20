@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0]
+
+### Added
+- Moon overlays, showing the current moon phase or lunar event (Thanks @Yawp Baron for the textures!)
+- Reduced World Infos items are now included in the default configuration.
+- Season overlays will now use translations from Serene Seasons and Fabric Seasons natively, rather than Immersive Overlays own less supported format.
+- Biome overlays for [Bloom](https://modrinth.com/mod/bloom), thanks @sierra_wx!.
+
+### Fixed
+- Clock overlay now moves correctly when status effects are present.
+- Mod no longer checks inventory when disabled.
+
 ## [1.7.5]
 
 ### Added

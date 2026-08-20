@@ -75,6 +75,9 @@ public class ClockOverlay {
             }
             iconXOffset = 20;
         }
+        if (MoonOverlay.showMoon && ModConfig.get().moon_reduced_info) {
+            tooltipSize = 21;
+        }
 
         int fontWidth = mc.font.width(time)+iconXOffset;
         Season season = Season.UNKNOWN;
@@ -91,7 +94,7 @@ public class ClockOverlay {
             // render text
             HudUtils.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
-        if (showWeather || MoonOverlay.showMoon) {
+        if (showWeather || MoonOverlay.showMoon(mc)) {
             var weather = getWeather(mc.player);
             if (ModConfig.get().moon_reduced_info && weather.contains("moon")) {
                 MoonOverlay.blitSprite(guiGraphics, MoonOverlay.getPhase(mc.level), xPlacement, xOffset, yPlacement);
@@ -210,7 +213,7 @@ public class ClockOverlay {
     }
 
     public static boolean isVisible() {
-        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons() || (ModConfig.get().moon_reduced_info && MoonOverlay.showMoon);
+        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons() || (ModConfig.get().moon_reduced_info && MoonOverlay.showMoon(Minecraft.getInstance()));
     }
 
     public record Season(String sprite, Component name) {

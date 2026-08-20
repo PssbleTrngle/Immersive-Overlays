@@ -95,13 +95,12 @@ public class MoonOverlay {
 
     //~ if >1.21 'float'-> 'net.minecraft.client.DeltaTracker'
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics, net.minecraft.client.DeltaTracker deltaTracker) {
-        if (!isVisible() || !ModConfig.get().moon_enable)
-            return;
         var mc = Minecraft.getInstance();
+        if (!isVisible() || !showMoon(mc))
+            return;
         if (OverlayHelpers.shouldCancelRender(mc))
             return;
         if (mc.level == null || mc.player == null || ModConfig.get().moon_reduced_info) return;
-        if (ModConfig.get().moon_only_at_night && !ClockOverlay.getWeather(mc.player).contains("moon")) return;
 
         MoonPhase moonPhase = getPhase(mc.level);
         if (moonPhase == null) return;
@@ -123,6 +122,10 @@ public class MoonOverlay {
         // render text
         HudUtils.drawString(guiGraphics, mc.font, moonPhase.text, xPlacement-xOffset+iconXOffset, yPlacement+2, moonPhase.color);
         blitSprite(guiGraphics, moonPhase, xPlacement, xOffset, yPlacement);
+    }
+
+    public static boolean showMoon(Minecraft mc) {
+        return ModConfig.get().moon_enable && !(ModConfig.get().moon_only_at_night && !ClockOverlay.getWeather(mc.player).contains("moon"));
     }
 
     static @Nullable MoonPhase getPhase(ClientLevel level) {

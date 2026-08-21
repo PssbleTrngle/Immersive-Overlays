@@ -37,8 +37,11 @@ public class ClockOverlay {
         if (mc.level == null || mc.player == null) return;
 
         String time = "Hi! ";
-        boolean showFirstLine = showTime || showDayCount;
-        if (showFirstLine) {
+        boolean showTimeOrDayCount = showTime || showDayCount;
+        boolean showReducedMoonInfo = MoonOverlay.showMoon(mc) && ModConfig.get().moon_reduced_info;
+        boolean showFirstLine = showTimeOrDayCount || showReducedMoonInfo;
+
+        if (showTimeOrDayCount) {
             if (OverlayHelpers.timePassesNaturally(mc.level)) {
                 time = getTime(ClientUtil.getOverworldTime());
                 if (time.length() == 4) {
@@ -59,7 +62,7 @@ public class ClockOverlay {
         }
         int iconYPlacement = yPlacement;
         int textYPlacement = yPlacement;
-        if (showWeather) {
+        if (showWeather || showReducedMoonInfo) {
             if (showFirstLine) {
                 iconXOffset = 20;
             }
@@ -75,9 +78,6 @@ public class ClockOverlay {
             }
             iconXOffset = 20;
         }
-        if (MoonOverlay.showMoon && ModConfig.get().moon_reduced_info) {
-            tooltipSize = 21;
-        }
 
         int fontWidth = mc.font.width(time)+iconXOffset;
         Season season = Season.UNKNOWN;
@@ -90,13 +90,13 @@ public class ClockOverlay {
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
-        if (showFirstLine) {
+        if (showTimeOrDayCount) {
             // render text
             HudUtils.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
-        if (showWeather || MoonOverlay.showMoon(mc)) {
+        if (showWeather || showReducedMoonInfo) {
             var weather = getWeather(mc.player);
-            if (ModConfig.get().moon_reduced_info && weather.contains("moon")) {
+            if (showReducedMoonInfo) {
                 MoonOverlay.blitSprite(guiGraphics, MoonOverlay.getPhase(mc.level), xPlacement, xOffset, yPlacement);
             } else if (showWeather) {
                 OverlayHelpers.blitSprite(guiGraphics, weather, xPlacement-xOffset-1, iconYPlacement-1);

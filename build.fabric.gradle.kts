@@ -213,7 +213,7 @@ dependencies {
     // Fabric Seasons
     if (hasProperty("deps.fabric_seasons")) {
         modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
-//        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
+        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
     } else {
         modCompileOnly("maven.modrinth:fabric-seasons:2.4.2-BETA+1.21")
     }

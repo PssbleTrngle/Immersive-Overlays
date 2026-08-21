@@ -125,7 +125,7 @@ public class MoonOverlay {
     }
 
     public static boolean showMoon(Minecraft mc) {
-        return ModConfig.get().moon_enable && !(ModConfig.get().moon_only_at_night && !ClockOverlay.getWeather(mc.player).contains("moon"));
+        return ModConfig.get().moon_enable && MoonOverlay.showMoon && (!ModConfig.get().moon_only_at_night || ClockOverlay.getWeather(mc.player).contains("moon"));
     }
 
     static @Nullable MoonPhase getPhase(ClientLevel level) {

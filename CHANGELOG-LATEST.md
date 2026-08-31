@@ -1,2 +1,2 @@
 ### Fixed
-- Various minor placement issues with Lunar Overlay and Clock Overlay.
+- Enhanced Celestials 2 support in 26.x.

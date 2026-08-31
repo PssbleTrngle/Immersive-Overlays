@@ -12,19 +12,18 @@ import java.util.Optional;
 
 public class EnhancedCelestials2Compat {
 	public static MoonOverlay.MoonPhase get(ClientLevel level) {
-		//? if <26 {
 		var worldDataOptional = EnhancedCelestials.lunarForecastWorldData(level);
 		if (worldDataOptional.isPresent()) {
 			var worldData = worldDataOptional.get();
 			Optional<ResourceKey<LunarEvent>> lunarEventResourceKey = worldData.currentLunarEventHolder().unwrapKey();
 			if (lunarEventResourceKey.isEmpty()) return null;
+			//~ if >26 '.location'->'.identifier'
 			ResourceLocation location = lunarEventResourceKey.orElseThrow().location();
 			var path = location.getPath();
 			if (!path.equals("default")) {
 				return new MoonOverlay.MoonPhase(path, MoonOverlay.MoonPhase.getText(location), worldData.currentLunarEvent().getNameColor().map(TextColor::getValue).orElse(MoonOverlay.MoonPhase.defaultColour()));
 			}
 		}
-		//?}
 		return null;
 	}
 }

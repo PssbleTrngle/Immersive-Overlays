@@ -280,6 +280,7 @@ dependencies {
 
     if (hasProperty("deps.enhanced_celestials_2")) {
         compileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+        compileOnly("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
     }
     if (hasProperty("deps.lunar")) {
         compileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")

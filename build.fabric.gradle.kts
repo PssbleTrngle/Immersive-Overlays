@@ -296,7 +296,7 @@ dependencies {
 
     if (hasProperty("deps.lunar")) {
         modCompileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")
-        modLocalRuntime("maven.modrinth:lunar:${mod.dep("lunar")}")
+//        modLocalRuntime("maven.modrinth:lunar:${mod.dep("lunar")}")
     } else {
         modCompileOnly("maven.modrinth:lunar:NJaeuXnp")
     }
@@ -308,8 +308,8 @@ dependencies {
     }
 
     if (hasProperty("deps.enhanced_celestials_2_lunar_events")) {
-//        modLocalRuntime("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
-//        modLocalRuntime("maven.modrinth:enhanced-celestials-2-default-lunar-events:${mod.dep("enhanced_celestials_2_lunar_events")}")
+        modLocalRuntime("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+        modLocalRuntime("maven.modrinth:enhanced-celestials-2-default-lunar-events:${mod.dep("enhanced_celestials_2_lunar_events")}")
 
     }
 
@@ -319,6 +319,8 @@ dependencies {
 
     if (hasProperty("deps.data_anchor")) {
         modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+    } else {
+        compileOnly("maven.modrinth:z2XEADmE:KcAJpnM8")
     }
 
     // Tiered Backpacks

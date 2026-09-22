@@ -39,5 +39,11 @@ versionRange = "[1.0.33, )"
 ordering = "NONE"
 side = "CLIENT"
 
+[[dependencies.immersiveoverlays]]
+modId = "oreganized"
+versionRange = "[5.3.0, )"
+ordering = "NONE"
+side = "CLIENT"
+
 [[mixins]]
 config = "immersiveoverlays.mixins.json"

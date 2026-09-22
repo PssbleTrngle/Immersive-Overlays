@@ -41,6 +41,7 @@ side = "CLIENT"
 
 [[dependencies.immersiveoverlays]]
 modId = "oreganized"
+type = "optional"
 versionRange = "[5.3.0, )"
 ordering = "NONE"
 side = "CLIENT"
